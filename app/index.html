@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lowball: Black Friday and Cyber Monday deals, prices checked</title>
+<meta name="description" content="Black Friday and Cyber Monday 2026 deals with the sale price, usual price, discount, store link, check time and source on every deal, and an honest verdict on whether it is really a deal.">
+<link rel="stylesheet" href="style.css">
+<link rel="modulepreload" href="js/deals-data.js">
+</head>
+<body>
+<header class="masthead">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">L↓</span>
+    <div><h1>Lowball</h1><p>Black Friday &amp; Cyber Monday 2026 deals, every price read and timed.</p></div>
+  </div>
+  <label class="search"><span class="sr">Search deals</span>
+    <input id="q" type="search" placeholder="Search a product, brand or store…" autocomplete="off">
+  </label>
+</header>
+
+<section class="summary" id="summary" aria-label="Board summary"></section>
+
+<section class="picks-wrap" aria-label="Top picks">
+  <h2>Today’s three best buys</h2>
+  <div class="picks" id="picks"></div>
+</section>
+
+<main class="layout">
+  <aside class="filters" aria-label="Filters">
+    <button class="toggle" id="toggle-filters">Filters &amp; sort</button>
+    <div class="filter-body">
+      <h3>Category</h3><div class="chips" id="cats"></div>
+      <h3>Store</h3><select id="store" aria-label="Store"></select>
+      <h3>Discount</h3><div class="chips" id="offs"></div>
+      <h3>Is it really a deal?</h3><div class="chips" id="verdicts"></div>
+      <div class="legend">
+        <p><span class="dot good"></span><b>New low</b> the source says no lower price was tracked.</p>
+        <p><span class="dot good2"></span><b>Strong</b> 40%+ off, or a match of the best price.</p>
+        <p><span class="dot mid"></span><b>Fair</b> a real cut, no record claimed.</p>
+        <p><span class="dot meh"></span><b>Routine</b> small cut, or a price that recurs.</p>
+      </div>
+    </div>
+  </aside>
+  <section class="results">
+    <div class="bar"><span id="count"></span><label>Sort <select id="sort" aria-label="Sort"></select></label></div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="detail" id="detail" role="dialog" aria-label="Deal details" hidden></aside>
+
+<footer class="method">
+  <h2>How Lowball checks a deal</h2>
+  <p>Every deal on this board was found and read on Black Friday, 27 November 2026, at the store’s own page or in a dated deals roundup that names the store. Each card says when the price was read (UTC) and where. The usual price is the one that page states. The verdict uses only what the source says about the price’s history and the size of the cut: we never invent a price history. Prices change fast on Black Friday, so check the store before you buy.</p>
+</footer>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
