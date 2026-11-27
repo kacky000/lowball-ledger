@@ -19,7 +19,7 @@ const all = DEALS.map((d, i) => {
     why: j.why,
     score: j.score,
     pct: j.pct,
-    match: d.match ?? slug(d.product),
+    match: slug(d.match ?? d.product),
     haystack: `${d.product} ${d.brand} ${d.store} ${d.category}`.toLowerCase(),
   };
 });

@@ -1,7 +1,7 @@
 // Is it really a deal? Each deal gets a verdict from what its source said about the price's history and from how
 // far below the usual price it sits, with the evidence spelled out, and a 0-100 score used to sort the best first.
 
-const NEW_LOW = /(lowest|all[- ]time low|record low|never (been|seen) (it )?(this )?(lower|cheaper)|best price (ever|yet|we've seen)|new low|below the \$?[\d,]+ low|first discount|even lower than)/i;
+const NEW_LOW = /(lowest|all[- ]time low|record[- ]low|never (been|seen) (it )?(this )?(lower|cheaper)|best price (ever|yet|we've seen)|new low|below the \$?[\d,]+ low|first discount|even lower than)/i;
 const MATCH_LOW = /(matches|matching|ties|same as) (its |the )?(previous |prior |prime day |october |all[- ]time )?(lowest|low|best)|\d+-day low|beats the/i;
 const ROUTINE = /(same (price )?as (prime day|last year|october)|frequent|often|regularly|routine|common)/i;
 const INFLATED = /(inflated|comparison value|comp\. value|compare[- ]at)/i;

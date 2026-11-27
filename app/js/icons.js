@@ -24,6 +24,7 @@ const P = {
   Fashion: 'M8 3l4 3 4-3 5 4-3 4v10H6V11L3 7z',
   Fitness: 'M3 12h18 M6 8v8 M18 8v8 M3 10v4 M21 10v4',
   'E-readers': 'M5 2h14v20H5z M8 6h8 M8 10h8 M8 14h5',
+  Travel: 'M5 7h14v12H5z M9 7V4h6v3 M8 19v2 M16 19v2',
 };
 
 export function categoryIcon(category, size = 22) {

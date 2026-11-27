@@ -20,7 +20,9 @@ export function summaryHtml(all, meta) {
 }
 
 export function topPicksHtml(all) {
-  const picks = [...all].sort((a, b) => b.score - a.score).slice(0, 3);
+  // One pick per product: the best-scored store's deal.
+  const seen = new Set();
+  const picks = [...all].sort((a, b) => b.score - a.score).filter((d) => !seen.has(d.match) && seen.add(d.match)).slice(0, 3);
   return picks.map((d, i) => `
     <a class="pick" href="#open=${d.id}" data-open="${d.id}">
       <span class="rank">#${i + 1}</span>
@@ -46,11 +48,25 @@ export function chipsHtml(all, state, counts) {
   return { catChips, storeOpts, offChips, verdictChips, sortOpts };
 }
 
-/** Other stores' prices for the same product, when the board holds them. */
+/** Every store's deal on the same product, cheapest first. */
+export function sameProduct(d, all) {
+  return all.filter((o) => o.match === d.match).sort((a, b) => a.price - b.price);
+}
+
+/** Other stores' prices for the same product, and whether this store is the cheapest. */
 function alsoAt(d, all) {
-  const same = all.filter((o) => o !== d && o.match === d.match);
-  if (!same.length) return '';
-  return `<p class="also">Also at ${same.map((o) => `${esc(o.store)} ${money(o.price)}`).join(', ')}</p>`;
+  const group = sameProduct(d, all);
+  if (group.length < 2) return '';
+  const others = group.filter((o) => o !== d);
+  const cheapest = group[0].price === d.price;
+  const lead = cheapest ? `<b class="cheapest">Cheapest of ${group.length} stores</b> · ` : `<b class="pricier">Cheaper elsewhere</b> · `;
+  return `<p class="also">${lead}${others.map((o) => `${esc(o.store)} ${money(o.price)}`).join(', ')}</p>`;
+}
+
+function compareTable(d, all) {
+  const group = sameProduct(d, all);
+  if (group.length < 2) return '';
+  return `<h4>Same product at ${group.length} stores</h4><table class="compare">${group.map((o, i) => `<tr${o === d ? ' class="me"' : ''}><td>${esc(o.store)}${i === 0 ? ' <span class="badge good">lowest</span>' : ''}</td><td><b>${money(o.price)}</b></td><td>${checkedLabel(o.checkedAt)}</td><td><a href="${esc(o.url)}" target="_blank" rel="noopener nofollow">open →</a></td></tr>`).join('')}</table>`;
 }
 
 export function cardHtml(d, all) {
@@ -91,14 +107,14 @@ export function detailHtml(d, all) {
     ['Condition', d.condition ? esc(d.condition) : 'None stated'],
     ['Price read', `${checkedLabel(d.checkedAt)} at <a href="${esc(d.source)}" target="_blank" rel="noopener">${esc(host(d.source))}</a>`],
   ];
-  const others = all.filter((o) => o !== d && o.category === d.category).sort((a, b) => b.score - a.score).slice(0, 3);
+  const others = all.filter((o) => o.match !== d.match && o.category === d.category).sort((a, b) => b.score - a.score).slice(0, 3);
   return `
     <button class="close" data-close aria-label="Close">×</button>
     <p class="cat">${categoryIcon(d.category)} ${esc(d.category)} · ${esc(d.brand)}</p>
     <h2>${esc(d.product)}</h2>
     <p class="big"><span class="now">${money(d.price)}</span> <s>${money(d.was)}</s> <span class="off">−${d.pct}%</span></p>
     <table>${rows.map(([k, v]) => `<tr><th>${k}</th><td>${v}</td></tr>`).join('')}</table>
-    ${alsoAt(d, all)}
+    ${compareTable(d, all)}
     <a class="go wide" href="${esc(d.url)}" target="_blank" rel="noopener nofollow">Open this deal at ${esc(d.store)} →</a>
     ${others.length ? `<h4>More ${esc(d.category)} deals</h4><ul class="more">${others.map((o) => `<li><button data-open="${o.id}">${esc(o.product)}</button> <b>${money(o.price)}</b> at ${esc(o.store)}</li>`).join('')}</ul>` : ''}`;
 }
