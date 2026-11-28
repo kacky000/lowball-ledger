@@ -16,7 +16,15 @@ export function summaryHtml(all, meta) {
     <div class="stat"><b>${stores}</b><span>stores</span></div>
     <div class="stat good"><b>${lows}</b><span>new lows</span></div>
     <div class="stat"><b>${best}%</b><span>deepest cut</span></div>
-    <div class="stat wide"><b>${checkedLabel(times[0]).replace(' UTC', '')}–${checkedLabel(times[times.length - 1]).split(', ')[1]}</b><span>prices read on ${esc(meta.day)}</span></div>`;
+    <div class="stat wide"><b>${span(times[0], times[times.length - 1])}</b><span>prices read on ${esc(meta.day)}</span></div>`;
+}
+
+/** "27 Nov, 07:10–08:20 UTC" within a day, "27 Nov 07:10 – 28 Nov 08:20 UTC" across two. */
+function span(first, last) {
+  const a = checkedLabel(first).replace(' UTC', '');
+  const b = checkedLabel(last);
+  if (a.split(', ')[0] === b.split(', ')[0]) return `${a}–${b.split(', ')[1]}`;
+  return `${a.replace(',', '')} – ${b.replace(',', '')}`;
 }
 
 export function topPicksHtml(all) {

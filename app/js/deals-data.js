@@ -3,7 +3,7 @@
 // where the price was read (source, sourceName), when (checkedAt, UTC), what the source said about the price's
 // history (evidence) and any condition. Nothing here is estimated: a field no page showed is left empty.
 
-export const BOARD = { day: 'Black Friday, 27 Nov 2026', title: 'Lowball' };
+export const BOARD = { day: 'Black Friday weekend, 27–28 Nov 2026', title: 'Lowball' };
 
 export const DEALS = [
   // ---------------------------------------------------------------- electronics

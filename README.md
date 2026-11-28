@@ -4,8 +4,10 @@
 [![rank](https://make.fun/badge/black-friday-deal-finder-01/kacky000/lowball-ledger/rank.svg)](https://make.fun/bounty/black-friday-deal-finder-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=black-friday-deal-finder-01)
 [![reward](https://make.fun/badge/black-friday-deal-finder-01/kacky000/lowball-ledger/reward.svg)](https://make.fun/bounty/black-friday-deal-finder-01?utm_source=github&utm_medium=readme&utm_campaign=black-friday-deal-finder-01)
 
-**Lowball** is a static Black Friday & Cyber Monday 2026 deal finder: 105 deals at 18 stores, 9 products priced at 2-3 stores side by side, each read on Black
-Friday (27 Nov 2026) at the store or in a dated roundup that names the store. Every card shows the product, store,
+**Lowball** is a static Black Friday & Cyber Monday 2026 deal finder: 248 deals at 71 stores, 9 products priced at 2-3 stores side by side. 105 were read on Black
+Friday (27 Nov 2026) and 143 more on Saturday 28 Nov (`app/js/deals-saturday.js`), each at the store or in a
+dated roundup that names the store. Where a usual price is the store's own comparison value (Dell, Best Buy TVs)
+the verdict says so instead of calling it a record. Every card shows the product, store,
 sale price, usual price, discount, dollars saved, a link to the product, when the price was read (UTC) and where,
 and a verdict on whether it is really a deal (New low, Strong, Fair, Routine or inflated) with the source's own
 words as evidence.

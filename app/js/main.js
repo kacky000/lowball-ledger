@@ -1,13 +1,17 @@
 // Lowball's page logic: load the checked deals, give each its verdict, then keep the list, the chips and the
 // detail panel in step with the search box, the filters, the sort and the URL hash.
 
-import { DEALS, BOARD } from './deals-data.js';
+import { DEALS as FRIDAY, BOARD } from './deals-data.js';
+import { SATURDAY } from './deals-saturday.js';
 import { judgeDeal } from './verdict.js';
 import { applyFilters, facetCounts, defaultState, stateToHash, hashToState } from './filters.js';
 import { summaryHtml, topPicksHtml, chipsHtml, cardHtml, detailHtml } from './render.js';
 import { slug } from './format.js';
 
 const $ = (id) => document.getElementById(id);
+
+/** Friday's board plus the deals found and read on Saturday 28 November. */
+const DEALS = [...FRIDAY, ...SATURDAY];
 
 /** Every deal with its verdict, score, discount, search text and same-product key. */
 const all = DEALS.map((d, i) => {
